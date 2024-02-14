@@ -1,21 +1,32 @@
-import { Request, Response } from 'express'
-import { courseService } from '../services/CourseService'
-
+import { Request, Response } from "express";
+import { courseService } from "../services/CourseService";
 
 export const courseController = {
-//GET /courses/:id
-
-show: async (req: Request, res: Response) => {
-    const { id } = req.params
+  //GET /courses/featured
+  featured: async (req: Request, res: Response) => {
 
     try {
-        const course = await courseService.findByIdWithEpisodes(id)
-        return res.json(course)
+      const featuredCourses = await courseService.getRandomFeaturedCourses()
+      return res.json(featuredCourses)
     } catch (err) {
-        if (err instanceof Error) {
-            return res.status(400).json({ message: err.message });
-          }
+      if (err instanceof Error) {
+        return res.status(400).json({ message: err.message });
+      }
     }
-}
+  },
 
-}
+  //GET /courses/:id
+
+  show: async (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    try {
+      const course = await courseService.findByIdWithEpisodes(id);
+      return res.json(course);
+    } catch (err) {
+      if (err instanceof Error) {
+        return res.status(400).json({ message: err.message });
+      }
+    }
+  },
+};
