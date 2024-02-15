@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { courseService } from "../services/CourseService";
+import { courseService } from "../services/courseService";
 import { getPaginationParams } from "../helpers/getPaginationParams";
 
 export const courseController = {
