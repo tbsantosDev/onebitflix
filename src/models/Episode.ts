@@ -13,7 +13,9 @@ export interface Episode {
 
 export interface EpisodeCreationAttributes extends Optional<Episode, 'id' | 'videoUrl' | 'secondsLong' > {}
 
-export interface EpisodeInstance extends Model<Episode, EpisodeCreationAttributes>, Episode {}
+export interface EpisodeInstance extends Model<Episode, EpisodeCreationAttributes>, Episode {
+    reduce(arg0: (currentList: any[], episode: { courseId: number; order: number }) => any[], arg1: EpisodeInstance[]): unknown;
+}
 
 export const Episode = sequelize.define<EpisodeInstance, Episode>('Episode', {
   id: {
